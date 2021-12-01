@@ -7,20 +7,20 @@ def ingest(research):
     return depth
 
 def upordown(data):
-    last = 0
+    last = ""
     increase = 0
     decrease = 0
-    for num in range(len(data)):
-        if last == 0:
-            print(data[num], "(N/A - no previous measurement)")
-        elif data[num] > last:
+    for num in data:
+        if last == "":
+            print(num, "(N/A - no previous measurement)")
+        elif num > last:
             increase += 1
-            print(data[num], "(increased)")
-        elif data[num] < last:
+            print(num, "(increased)", increase)
+        elif num < last:
             decrease += 1
-            print(data[num], "(decreased)")
-        last = data[num]
-    print("increased:", increase)
+            print(num, "(decreased)", decrease)
+        last = num
+    print("increased: ", increase)
     print("decreased: ", decrease)
 
 
