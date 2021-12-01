@@ -15,14 +15,14 @@ def upordown(data):
             print(num, "(N/A - no previous measurement)")
         elif num > last:
             increase += 1
-            print(num, "(increased)", increase)
+            print(num, "(increased)")
         elif num < last:
             decrease += 1
-            print(num, "(decreased)", decrease)
+            print(num, "(decreased)")
         last = num
     print("increased: ", increase)
     print("decreased: ", decrease)
 
 
 if __name__ == "__main__":
-    upordown(ingest("input_short.txt"))
+    upordown(ingest("1/input.txt"))
