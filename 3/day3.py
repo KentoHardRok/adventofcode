@@ -1,12 +1,14 @@
 import fileinput
 import pandas as pd
 
+
 def ingest(info):
     data = []
     for line in fileinput.input(files = info):
         data.append(list(line.rstrip()))
     infodb = pd.DataFrame(data)
     return infodb
+
 
 def onoff(x):
     if x == '1':
@@ -16,6 +18,7 @@ def onoff(x):
     else:
         pass
     return x
+
 
 def findcommon(datab):
     freq = datab.mode()
@@ -28,6 +31,7 @@ def findcommon(datab):
 
 def binary2dec(binary):
     return int(binary,2)
+
 
 if __name__ == "__main__":
     gamma, epsilon = findcommon(ingest("input.txt"))
