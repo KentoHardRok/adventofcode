@@ -10,19 +10,28 @@ def ingest(info):
     columns=list('abcdefghijkl'))
     return infodb
 
-def co2(db, commondt):
+def gen(db, commondt):
     col = 'abcdefghijkl'
+    print(commondt)
     count = 0
-    newdb = pd.Series([])
+    newdb = db
     for i in commondt:
         chk = col[count]
-        test = db.iat[0,count]
-        if newdb.empty:
-            newdb = db.query("{0} == {1}".format(chk, test))
+        if i == 'a':
+            newdb = db.loc[db["{}".format(chk)] == i]
         else:
-            newdb = newdb.query("{0} == {1}".format(chk, test))
+            veri = newdb.loc[db["{}".format(chk)] == i]
+            if veri.empty:
+                return newdb
+            else:
+                newdb = newdb.loc[db["{}".format(chk)] == i]
         count += 1
-    return newdb     
+    return newdb    
+
+def diffpd(data):
+    df = data.mode()
+
+
 
 def onoff(x):
     if x == '1':
@@ -52,6 +61,7 @@ if __name__ == "__main__":
     gamma, epsilon = findcommon(raw)
     g_int = binary2dec(gamma)
     e_int = binary2dec(epsilon)
-    print(co2(raw, gamma))
+    print(gen(raw, gamma))
+    print(gen(raw, epsilon))
     power = g_int * e_int
     print(power)
