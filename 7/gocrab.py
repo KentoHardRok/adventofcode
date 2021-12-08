@@ -1,6 +1,7 @@
 import fileinput
 import numpy as np
-
+import time
+start_time = time.time()
 
 def ingest(data):
     crabsub = []
@@ -21,10 +22,9 @@ def used_gas(move):
 def gas(data):
     g_total = 0
     g_used = 0
-    median = int(np.mean(data))
-    print(median)
+    mean = int(np.mean(data))
     for x in np.nditer(data):
-        g_used = abs(x - median)
+        g_used = abs(x - mean)
         g_total += used_gas(g_used.astype(int))
     return g_total
 
@@ -32,3 +32,4 @@ def gas(data):
 if __name__ == "__main__":
     data = ingest("input.txt")
     print(gas(data))
+    print("--- %s seconds ---" % (time.time() - start_time))
